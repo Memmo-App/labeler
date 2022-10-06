@@ -196,7 +196,7 @@ function isMatch(changedFile: string, matchers: IMinimatch[]): boolean {
 
 // equivalent to "Array.some()" but expanded for debugging and clarity
 function checkAny(changedFiles: string[], globs: string[]): boolean {
-  const matchers = globs.map((g) => new Minimatch(g));
+  const matchers = globs.map((g) => new Minimatch(g, { dot: true }));
   core.debug(`  checking "any" patterns`);
   for (const changedFile of changedFiles) {
     if (isMatch(changedFile, matchers)) {
@@ -211,7 +211,7 @@ function checkAny(changedFiles: string[], globs: string[]): boolean {
 
 // equivalent to "Array.every()" but expanded for debugging and clarity
 function checkAll(changedFiles: string[], globs: string[]): boolean {
-  const matchers = globs.map((g) => new Minimatch(g));
+  const matchers = globs.map((g) => new Minimatch(g, { dot: true }));
   core.debug(` checking "all" patterns`);
   for (const changedFile of changedFiles) {
     if (!isMatch(changedFile, matchers)) {
